@@ -34,4 +34,4 @@ Website for the Purdue Lunabotics Team
 - Theme Colors are from Purdue's Official Color Document
 - Make Sure the .bsdesign file is not lost as you cannot edit the website after it is lost.
 - Recommended to Optimize Images as GitHub does not support any files over 100MB (esp for the .bsdesign file)
-- links need to be /~lunabot/<page>.html otherwise they don't work.
+- links need to be /~lunabot/<'page'>.html otherwise they don't work.
