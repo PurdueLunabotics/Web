@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./form.css" />
+  </head>
+  <body>
+    <script src="https://aarongustafson.github.io/form-repeatable/define.js" type="module"></script>
+    <h1>Reimbursement Form</h1>
+    
+    <form>
+      <h2>Purchase Information</h2>
+
+      <label for="name">Full Name (First Last)</label>
+      <input id="name" type="text" name="name"/>
+      
+      <label for="email">Purdue Email</label>
+      <input id="email" type="text" name="email"/>
+      
+      <label for="subteam">Subteam your Purchase was for</label>
+      <select id="subteam" name="subteam">
+        <option value="Drivetrain">Drivetrain</option>
+        <option value="Ex-Dep">Ex-Dep</option>
+        <option value="P&H">P&H</option>
+        <option value="Software">Software</option>
+        <option value="Fab-Ops">Fab-Ops</option>
+        <option value="B-Ops">B-Ops</option>
+        <option value="Admin">Admin</option>
+        <option value="Trip">Trip</option>
+      </select>
+      
+      <label for="date">Date of Purchase</label>
+      <input id="date" type="date" name="date"/>
+
+      <label for="vendor">Supplier/Vendor</label>
+      <input id="vendor" type="text" name="vendor"/>
+      
+      <label for="reciept">Upload Itemized Receipt  (.pdf or .jpg) **THIS SHOULD INCLUDE PROOF OF PAYMENT (credit card, debit card, etc.) AND PROOF OF SHIPPING</label>
+      <input id="reciept" type="file" name="reciept" accept=".pdf,.jpg,.jpeg"/>
+      
+      <label for="total">Total Cost</label>
+      <input id="total" type="text" name="total"/>
+
+      <label for="construction">Is the item you bought a material that directly supports the construction, manufacturing, testing, or analysis of our rover or test-pit? Most items bought by subteam leads/members will fall under "Yes."</label>
+      <select id="construction" name="construction">
+        <option value="Yes">Yes (i.e. bunny suits, fasteners, stock, motors, etc)</option>
+        <option value="No">No (i.e. Canes callout food, DaVinci video editing software, flight tags)</option>
+      </select>
+
+      <h2>Part Order Info</h2>   
+      
+      <label for="shipping">Shipping Cost + Tax (for all items)</label>
+      <input id="shipping" type="text" name="shipping"/>
+      
+      <form-repeatable>
+        <div>
+          <h3>Item 1</h3>
+          <label for="item-1">Item Purchased and Description of Purpose</label>
+          <input id="item-1" type="text" name="items[]"/>
+          <br/>
+          
+          <label for="cad-1">Assembly/Part CAD File Name (if applicable)</label>
+          <input id="cad-1" type="text" name="cads[]"/>
+          <br/>
+          
+          <label for="part-1">Part Number (if applicable)</label>
+          <input id="part-1" type="text" name="parts[]"/>
+          <br/>
+          
+          <label for="link-1">Link/URL</label>
+          <input id="link-1" type="text" name="links[]"/>
+          <br/>
+          
+          <label for="unit-1">Unit Price ($)</label>
+          <input id="unit-1" type="text" name="units[]"/>
+          <br/>
+          
+          <label for="quantity-1">Quantity</label>
+          <input id="quantity-1" type="text" name="quantities[]"/>
+          <br/>
+          
+          <label for="total-1">Total Cost of This Item</label>
+          <input id="total-1" type="text" name="totals[]"/>
+          <br/>
+          
+        </div>
+      </form-repeatable>
+      
+      <h2>Method of Payment</h2>
+      <label for="payment">Was this purchase made using:</label>
+      <select id="payment" name="payment">
+        <option value="reimburse">Personal Funds (requesting reimbursement)</option>
+        <option value="amazon">Club P-Card or Amazon Account</option>
+        <option value="no">Personal Funds (NOT requesting reimbursement)</option>
+      </select>
+      
+      <h3>If you are not requesting reimbursement, skip to the end and submit now</h3>
+      
+      <details>
+        <summary>FILL THIS OUT IF YOU ARE NOT REGISTERED WITH BOSO</summary>
+        <label for="address">Preferred Mailing Address</label>
+        <input id="address" type="text" name="address"/>
+        
+        <label for="permAddress">Permanent Address</label>
+        <input id="permAddress" type="text" name="permAddress"/>
+        
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="text" name="phone"/>
+      </details>
+      
+      <h2> Reimbursement Info </h2>
+      <label for="location">Do you want to pick up the check at Krach or have it mailed to your address</label>
+      <select id="location" name="location">
+        <option value="pickup">Pick up at Krach (faster, usually available within a few days of BOSO approval)</option>
+        <option value="mail">Mail (it takes a bit longer)</option>
+      </select>
+      
+      <label for="certify">I certify that the attached receipts or invoices represent legitimate expenses incurred solely for the benefit of the student organization. I also certify that I have not been previously reimbursed for these expenses and am still currently due for this reimbursement. Type Yes</label>
+      <input id="certify" type="text" name="certify"/>
+      
+      <label for="signature">Electronic Signature</label>
+      <input id="signature" type="text" name="signature"/>
+
+      <h2>Message the discord reimbursement channel when complete</h2>
+
+      <input type="submit">
+    </form>
+  </body>
+  
+  </html>
