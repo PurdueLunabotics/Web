@@ -5,19 +5,19 @@
   </head>
   <body>
     <script src="https://aarongustafson.github.io/form-repeatable/define.js" type="module"></script>
-    <h1>Reimbursement Form</h1>
+    <h1>Reimbursement/Part Order Form</h1>
     
-    <form>
+    <form id="form">
       <h2>Purchase Information</h2>
 
       <label for="name">Full Name (First Last)</label>
-      <input id="name" type="text" name="name"/>
+      <input id="name" type="text" name="name" required/>
       
       <label for="email">Purdue Email</label>
-      <input id="email" type="text" name="email"/>
+      <input id="email" type="text" name="email" required/>
       
       <label for="subteam">Subteam your Purchase was for</label>
-      <select id="subteam" name="subteam">
+      <select id="subteam" name="subteam" required>
         <option value="Drivetrain">Drivetrain</option>
         <option value="Ex-Dep">Ex-Dep</option>
         <option value="P&H">P&H</option>
@@ -29,19 +29,21 @@
       </select>
       
       <label for="date">Date of Purchase</label>
-      <input id="date" type="date" name="date"/>
+      <input id="date" type="date" name="date" required/>
 
       <label for="vendor">Supplier/Vendor</label>
-      <input id="vendor" type="text" name="vendor"/>
+      <input id="vendor" type="text" name="vendor" required/>
       
-      <label for="reciept">Upload Itemized Receipt  (.pdf or .jpg) **THIS SHOULD INCLUDE PROOF OF PAYMENT (credit card, debit card, etc.) AND PROOF OF SHIPPING</label>
-      <input id="reciept" type="file" name="reciept" accept=".pdf,.jpg,.jpeg"/>
+      <label for="file">Upload Itemized Receipt  (.pdf or .jpg) **THIS SHOULD INCLUDE PROOF OF PAYMENT (credit card, debit card, etc.) AND PROOF OF SHIPPING</label>
+      <input id="file" type="file" name="file" accept=".pdf,.jpg,.jpeg" required/>
+
+      <input id="reciept" type="text" name="reciept" style="display:none"/>
       
       <label for="total">Total Cost</label>
-      <input id="total" type="text" name="total"/>
+      <input id="total" type="text" name="total" required/>
 
       <label for="construction">Is the item you bought a material that directly supports the construction, manufacturing, testing, or analysis of our rover or test-pit? Most items bought by subteam leads/members will fall under "Yes."</label>
-      <select id="construction" name="construction">
+      <select id="construction" name="construction" required>
         <option value="Yes">Yes (i.e. bunny suits, fasteners, stock, motors, etc)</option>
         <option value="No">No (i.e. Canes callout food, DaVinci video editing software, flight tags)</option>
       </select>
@@ -49,13 +51,13 @@
       <h2>Part Order Info</h2>   
       
       <label for="shipping">Shipping Cost + Tax (for all items)</label>
-      <input id="shipping" type="text" name="shipping"/>
+      <input id="shipping" type="text" name="shipping" required/>
       
       <form-repeatable>
-        <div>
-          <h3>Item 1</h3>
+        <fieldset>
+          <h3><legend>Item 1</legend></h3>
           <label for="item-1">Item Purchased and Description of Purpose</label>
-          <input id="item-1" type="text" name="items[]"/>
+          <input id="item-1" type="text" name="items[]" required/>
           <br/>
           
           <label for="cad-1">Assembly/Part CAD File Name (if applicable)</label>
@@ -66,28 +68,28 @@
           <input id="part-1" type="text" name="parts[]"/>
           <br/>
           
-          <label for="link-1">Link/URL</label>
+          <label for="link-1">Link/URL (online purchases only)</label>
           <input id="link-1" type="text" name="links[]"/>
           <br/>
           
           <label for="unit-1">Unit Price ($)</label>
-          <input id="unit-1" type="text" name="units[]"/>
+          <input id="unit-1" type="text" name="units[]" required/>
           <br/>
           
           <label for="quantity-1">Quantity</label>
-          <input id="quantity-1" type="text" name="quantities[]"/>
+          <input id="quantity-1" type="text" name="quantities[]" required/>
           <br/>
           
           <label for="total-1">Total Cost of This Item</label>
-          <input id="total-1" type="text" name="totals[]"/>
+          <input id="total-1" type="text" name="totals[]" required/>
           <br/>
           
-        </div>
+        </fieldset>
       </form-repeatable>
       
       <h2>Method of Payment</h2>
       <label for="payment">Was this purchase made using:</label>
-      <select id="payment" name="payment">
+      <select id="payment" name="payment" required>
         <option value="reimburse">Personal Funds (requesting reimbursement)</option>
         <option value="amazon">Club P-Card or Amazon Account</option>
         <option value="no">Personal Funds (NOT requesting reimbursement)</option>
@@ -114,16 +116,91 @@
         <option value="mail">Mail (it takes a bit longer)</option>
       </select>
       
-      <label for="certify">I certify that the attached receipts or invoices represent legitimate expenses incurred solely for the benefit of the student organization. I also certify that I have not been previously reimbursed for these expenses and am still currently due for this reimbursement. Type Yes</label>
-      <input id="certify" type="text" name="certify"/>
+      <label for="certify">I certify that the attached receipts or invoices represent legitimate expenses incurred solely for the benefit of the student organization. I also certify that I have not been previously reimbursed for these expenses and am still currently due for this reimbursement.<br/> Type Yes</label>
+      <input id="certify" type="text" name="certify" required/>
       
       <label for="signature">Electronic Signature</label>
-      <input id="signature" type="text" name="signature"/>
+      <input id="signature" type="text" name="signature" required/>
 
       <h2>Message the discord reimbursement channel when complete</h2>
 
-      <input type="submit">
+      <button id="submit" type="submit">Submit</button>
+
+      <input style="display:none" type="text" id="done" value="0">
     </form>
+
+    <div id="finish" hidden>
+      <h3> Submitted Form </h3>
+      <p id="output1"></p>
+      <p id="output2"></p>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/gh/tanaikech/HtmlFormObjectParserForGoogleAppsScript_js@master/htmlFormObjectParserForGoogleAppsScript_js.min.js"></script>
+<script>
+  const url = "https://script.google.com/macros/s/AKfycbwMSaMiBMKzcVzyBHAIBn6MKAuXIhXPCUZJwSs4HW2XtuBWjee6EoskQz4kffOn512r_w/exec";
+  const url2 = "https://script.google.com/macros/s/AKfycbyK2jwV97KY87UGkpWB75l_riLGEeGJCD9r6rZDdzPDNDnHs5WRdy4tckW2-5qOicdW-g/exec";
+  
+  const form = document.getElementById("form");
+  form.addEventListener("submit", async (e) => {
+    console.log("start")
+
+    e.preventDefault()
+    if(document.getElementById("done").value == "1") {
+      document.getElementById("done").value = "0";
+      const formData = new FormData(document.getElementById("form"));
+      const data = {};
+      const output = new FormData();
+
+
+      for (let [key, value] of formData.entries()) {
+        if (key.endsWith('[]')) {
+          const arrayKey = key.slice(0, -2);
+          if (!data[arrayKey]) {
+            data[arrayKey] = [];
+          }
+          data[arrayKey].push(value);
+        } else {
+          if (!data[key]) {
+            data[key] = value;
+          } else if (Array.isArray(data[key])) {
+            data[key].push(value);
+          } else {
+            data[key] = [data[key], value];
+          }
+        }
+      }
+
+      for (let [key, value] of Object.entries(data)) {
+        output.append(key, value);
+      }
+      
+      let response = await fetch(url2, {
+        method: "POST",
+        body: output
+      }).then((res) => res.json());
+      document.getElementById("output2").innerHTML = JSON.stringify(response);
+      console.log(response);
+      return;
+    }
+    document.getElementById("form").hidden = true;
+    document.getElementById("finish").hidden = false;
+    const obj = await ParseFormObjectForGAS(form);
+    obj.file[0].value=""
+    console.log(JSON.stringify(obj))
+    let response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(obj)
+    }).then((res) => res.json())
+    console.log(response)
+
+    document.getElementById("reciept").value = response.fileUrl;
+    document.getElementById("output1").innerHTML = JSON.stringify(response);
+    document.getElementById("done").value = "1";
+    document.getElementsByTagName("form-repeatable")[0]._updateFormValue()
+    document.getElementById("submit").click();
+
+  });
+</script>
   </body>
   
   </html>
