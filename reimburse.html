@@ -96,6 +96,9 @@
       
       <h3>If you are not requesting reimbursement, skip to the end and submit now</h3>
       
+      
+      <h2> Reimbursement Info </h2>
+      
       <details>
         <summary>FILL THIS OUT IF YOU ARE NOT REGISTERED WITH BOSO</summary>
         <label for="address">Preferred Mailing Address</label>
@@ -107,8 +110,7 @@
         <label for="phone">Phone Number</label>
         <input id="phone" type="text" name="phone"/>
       </details>
-      
-      <h2> Reimbursement Info </h2>
+
       <label for="location">Do you want to pick up the check at Krach or have it mailed to your address</label>
       <select id="location" name="location">
         <option value="pickup">Pick up at Krach (faster, usually available within a few days of BOSO approval)</option>
@@ -121,15 +123,15 @@
       <label for="signature">Electronic Signature</label>
       <input id="signature" type="text" name="signature" required/>
 
-      <h2>Message the discord reimbursement channel when complete</h2>
-
+      
       <button id="submit" type="submit">Submit</button>
-
+      
       <input style="display:none" type="text" id="done" value="0">
     </form>
-
+    
     <div id="finish" hidden>
-      <h3> Submitted Form </h3>
+      <h1> Submitted Form </h3>
+      <h2>Message the discord reimbursement channel when complete</h2>
       <p id="output1"></p>
       <p id="output2"></p>
     </div>
@@ -181,6 +183,8 @@
       console.log(response);
       return;
     }
+
+
     document.getElementById("form").hidden = true;
     document.getElementById("finish").hidden = false;
     const obj = await ParseFormObjectForGAS(form);
