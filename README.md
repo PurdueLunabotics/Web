@@ -21,28 +21,10 @@ Website for the Purdue Lunabotics Team
 - In Bootstrap Studio, go to file -> Export. 
 - Set Export Destination to this folder, recommended to skip unused images.
 - Push this folder with new files to GitHub.
-
-## Via Physical Purdue Computer Access
-- Log into the lunabot@purdue.edu account on a Purdue desktop.
-- Download these files from GitHub.
-- On the desktop there is a "www" folder
-- Delete the files in there and copy this entire folder into there.
-
-## Via Purdue VPN
-- Connect to the Purdue VPN (webvpn.purdue.edu)
-- Go to File Explorer and right click on "This PC"
-- Click Map Network Drive
-- In the Folder field type `\\nas01.itap.purdue.edu\puhome\www\`
-- Check "Connect Using Different Credentials" and click "Finish"
-- Log in using lunabot@purdue.edu credentials
-- Delete the files in there and copy this entire folder into there.
-- The connection is quite slow and can take a while to copy the files.
-
+- The website will automatically update from the GitHub repo.
 
 # General Notes
 - Join + Sponsor Form goes to the lunabot@purdue.edu email.
 - Theme Colors are from Purdue's Official Color Document
 - Make Sure the .bsdesign file is not lost as you cannot edit the website after it is lost.
 - Recommended to optimize Images as GitHub does not support any files over 100MB (esp for the .bsdesign file)
-- Links need to be /~lunabot/<'page'>.html otherwise they don't work.
-
